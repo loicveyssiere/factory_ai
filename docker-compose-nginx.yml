@@ -1,0 +1,32 @@
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./.htpasswd:/etc/nginx/.htpasswd:ro
+    depends_on:
+      - ollama
+
+  ollama:
+    restart: always
+    volumes:
+      - ./data/ollama:/root/.ollama
+    container_name: ollama
+    image: ollama/ollama:latest
+    environment:
+      OLLAMA_MAX_LOADED_MODELS: 2
+      OLLAMA_NUM_PARALLEL: 10
+      OLLAMA_KEEP_ALIVE: "5m"
+    #ports:
+    #  - 11434:11434
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
