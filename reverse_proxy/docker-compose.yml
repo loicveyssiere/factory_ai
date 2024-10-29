@@ -21,7 +21,6 @@ services:
       OLLAMA_MAX_LOADED_MODELS: 2
       OLLAMA_NUM_PARALLEL: 6
       OLLAMA_KEEP_ALIVE: "5m"
-      OLLAMA_HOST: http://localhost:11434
     # deploy:
     #   resources:
     #     reservations:
